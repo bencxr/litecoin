@@ -35,7 +35,7 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("0x35fa624644748cd63e516245970f085e3a3a1e46c484fedb08474a16e9c62837");
+uint256 hashGenesisBlock("0x16b0cf3fb19b5665480e7c7f9973d43ba5b73a21a035b414d7dcf70a66fbe1f3");
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // GarlicCoin: starting difficulty is 1 / 2^12
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -2793,35 +2793,7 @@ bool InitBlockIndex() {
         block.nVersion = 1;
         block.nTime    = 1401777805;
         block.nBits    = 0x1e0ffff0;
-        block.nNonce   = 1296453112;
-
-	printf("Searching for genesis block...\n");
-        // This will figure out a valid hash and Nonce if you're
-        // creating a different genesis block:
-        uint256 hashTarget = CBigNum().SetCompact(block.nBits).getuint256();
-        uint256 thash;
-
-        while(true)
-        {
-            static char scratchpad[SCRYPT_SCRATCHPAD_SIZE];
-            scrypt_1024_1_1_256_sp(BEGIN(block.nVersion), BEGIN(thash), scratchpad);
-            if (thash <= hashTarget)
-                break;
-            if ((block.nNonce & 0xFFF) == 0)
-            {
-                printf("nonce %08X: hash = %s (target = %s)\n", block.nNonce, thash.ToString().c_str(), hashTarget.ToString().c_str());
-            }
-            ++block.nNonce;
-            if (block.nNonce == 0)
-            {
-                printf("NONCE WRAPPED, incrementing time\n");
-                ++block.nTime;
-            }
-        }
-        printf("block.nTime = %u \n", block.nTime);
-        printf("block.nNonce = %u \n", block.nNonce);
-        printf("block.GetHash = %s\n", block.GetHash().ToString().c_str());
-	exit(0);
+        block.nNonce   = 1298664034;
 
         if (fTestNet)
         {
